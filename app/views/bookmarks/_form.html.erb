@@ -1,0 +1,29 @@
+<%= form_for(@bookmark, :html=>{:multipart=>true}, ) do |f| %>
+  <% if @bookmark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bookmark.errors.count, "error") %> prohibited this bookmark from being saved:</h2>
+
+      <ul>
+      <% @bookmark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.label :photo %><br>
+    <%= f.file_field :photo %>
+  </p>
+  <p>
+    <%= f.submit "submit"%>
+  </p>
+<% end %>
