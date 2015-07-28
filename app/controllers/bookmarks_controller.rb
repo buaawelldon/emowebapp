@@ -1,4 +1,5 @@
 class BookmarksController < ApplicationController
+  skip_before_filter  :verify_authenticity_token
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
   #has_attached_file :photo
   # GET /bookmarks
@@ -69,6 +70,6 @@ class BookmarksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
-      params.require(:bookmark).permit(:title, :url, :photo)
+      params.require(:bookmark).permit(:title,:url,:photo)
     end
 end

@@ -1,10 +1,11 @@
-<h1>Listing bookmarks</h1>
+<h1>Faces</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Url</th>
+      <th>Title    </th>
+      <th>Names</th>
+      <th>Images</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,11 +16,11 @@
         <td><%= bookmark.title %></td>
         <td><%= bookmark.url %></td>
         <div>
-        <td><%= image_tag bookmark.photo.url %></td>
+        <td><%= image_tag bookmark.photo.url(:thumb) %></td>
         </div>
         <td><%= link_to 'Show', bookmark %></td>
         <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to 'Destroy', bookmark, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', bookmark, method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
