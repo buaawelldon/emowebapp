@@ -1,4 +1,1 @@
-json.array!(@bookmarks) do |bookmark|
-  json.extract! bookmark, :id, :title, :url
-  json.url bookmark_url(bookmark, format: :json)
-end
+json.extract! @thiselment, :id, :title, :url, :created_at, :updated_at, :angry, :disgust, :fear, :happy, :neutral, :sad, :surprise 

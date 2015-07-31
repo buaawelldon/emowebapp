@@ -6,6 +6,7 @@ class BookmarksController < ApplicationController
   # GET /bookmarks.json
   def index
     @bookmarks = Bookmark.all
+    @thiselment=Bookmark.last
   end
 
   # GET /bookmarks/1
@@ -22,15 +23,25 @@ class BookmarksController < ApplicationController
   def edit
   end
 
+  def prob
+  end
   # POST /bookmarks
   # POST /bookmarks.json
   def create
     @bookmark = Bookmark.new(bookmark_params)
-
+    # %x(python /home/wei/Documents/pythontool/emopred.py #{@bookmark.photo.path})
     respond_to do |format|
       if @bookmark.save
+
         format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
-        format.json { render :show, status: :created, location: @bookmark }
+        format.json { render :show, status: :created, happy: @bookmark }
+        
+        @sc=%x(curl --data  #{@bookmark.photo.path} 134.74.112.32:2500)
+        file=File.read('/home/wei/Documents/pythontool/data.json')
+        h=JSON.parse(file)
+        @bookmark.attributes={angry:h["Angry"], disgust:h["Disgust"], fear:h["Fear"], happy: h["Happy"], neutral:h["Neutral"], sad:h["Sad"], surprise:h["Surprise"]}
+    
+
       else
         format.html { render :new }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }

@@ -14,13 +14,10 @@
   <strong>Photo:</strong>
   <%= image_tag @bookmark.photo.url(:medium) if @bookmark.photo.file? %>
 </p>
-<p><%=@bookmark.photo.path%></p>
-<% %x(python /home/wei/Documents/pythontool/emopred.py #{@bookmark.photo.path}) %>
-<% file=File.read('/home/wei/Documents/pythontool/data.json') %>
-<% h=JSON.parse(file)%>
+
 <p>
 	<strong> Score:</strong>
-	<%= h %>
+	<%=@sc %>  
 </p>
 <%= link_to 'Edit', edit_bookmark_path(@bookmark) %> |
 <%= link_to 'Back', bookmarks_path %>

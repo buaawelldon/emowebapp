@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150719184924) do
+ActiveRecord::Schema.define(version: 20150729184414) do
 
   create_table "bookmarks", force: true do |t|
     t.string   "title"
@@ -22,6 +22,13 @@ ActiveRecord::Schema.define(version: 20150719184924) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "angry"
+    t.string   "disgust"
+    t.string   "fear"
+    t.string   "happy"
+    t.string   "neutral"
+    t.string   "sad"
+    t.string   "surprise"
   end
 
 end
