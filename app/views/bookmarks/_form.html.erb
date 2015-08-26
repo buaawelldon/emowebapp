@@ -10,14 +10,99 @@
       </ul>
     </div>
   <% end %>
+<div>
+    <video id="live" width="320" height="240" autoplay style="display: inline;"></video>
+    <canvas width="320" id="canvas" height="240"  style="display: inline;"></canvas>
+</div>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+ <script type="text/javascript">
+    // navigator.getUserMedia = (navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia || 
+                            navigator.msGetUserMedia);
+// Check that the browser supports getUserMedia.
+// If it doesn't show an alert, otherwise continue.
+  
+    // var vid = document.getElementById('live');
+    // var canvas_wnd = document.getElementById('canvas');
+    // context = canvas.getContext('2d');
+
+    var vid = $("#live").get()[0];
+    var canvas = $("#canvas");
+    var context = canvas.get()[0].getContext('2d');
+
+if (navigator.getUserMedia) {
+  // Request the camera.
+  navigator.getUserMedia(
+    // Constraints
+    {
+      video: true
+    },
+
+    // Success Callback
+    function(localMediaStream) {
+        // Get a reference to the video element on the page.
+        
+
+        // Create an object URL for the video stream and use this 
+        // to set the video source.
+        vid.src = window.URL.createObjectURL(localMediaStream);
+    },
+
+    //
+    // Error Callback
+    function(err) {
+      // Log the error to the console.
+      console.log('The following error occurred when trying to use getUserMedia: ' + err);
+    }
+  );
+
+}
+        timer = setInterval(
+            function () {
+                context.drawImage(vid, 0, 0, 320, 240);
+                var canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+                //document.getElementById('imgurl').innerHTML=canv_str;
+               $('#bookmark_canv').attr('value',canv_str)
+
+            }, 1000);
+                
+
+        // $(function(){
+        // });
+
+    // var canvas = $("#canvas");
+    // var ctx = canvas.get()[0].getContext('2d');
+    
+    // navigator.webkitGetUserMedia("video",
+    //         function(stream) {
+
+    //     // Create an object URL for the video stream and use this 
+    //     // to set the video source.
+    //             var video = document.getElementById('live');
+    //             video.src = webkitURL.createObjectURL(stream);
+    //         },
+    //         function(err) {
+    //             console.log("Unable to get video stream!")
+    //         }
+    // )
+ 
+    // timer = setInterval(
+    //         function () {
+    //             ctx.drawImage(video, 0, 0, 320, 240);
+    //         }, 250);
+</script>
+
 
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </p>
+  
   <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :url %>
+    <%= f.hidden_field :canv %>
   </p>
   <p>
     <%= f.label :photo %><br>

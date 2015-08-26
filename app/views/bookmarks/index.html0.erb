@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Thu Aug 06 2015 23:51:55 GMT+0000 (UTC) -->
+<html data-wf-site="55c3ccde32868f017b95dac4" data-wf-page="55c3ccde32868f017b95dac6">
+<head>
+  <meta charset="utf-8">
+  <title>CCVCL Emo Computing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/ccvcl-emo-computing.webflow.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Montserrat:400,700","Merriweather:300,400,700,900","Petit Formal Script:regular"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/CCVCL Logo With Glow (For Dark Background).png">
+  <link rel="apple-touch-icon" href="images/CCVCL Logo With Glow (For Dark Background).png">
+</head>
+<body>
+  <div class="w-section w-clearfix bars-wrapper">
+    <div class="bar"></div>
+    <div class="bar _2"></div>
+    <div class="bar _3"></div>
+    <div class="bar _4"></div>
+    <div class="bar _5"></div>
+    <div class="bar _6"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="w-section header-section">
+    <div class="w-container">
+      <div class="w-row">
+        <div class="w-col w-col-3"><img src="/assets/images/CCVCL Logo With Glow (For Dark Background).png" width="119">
+        </div>
+        <div class="w-col w-col-9">
+          <div>
+            <h1><strong>Emo Computing</strong></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-container container">
+      <div class="w-form sign-up-form">
+        <form name="wf-form-signup-form" data-name="Signup Form">
+          <div>
+            <div class="w-row">
+              <div class="w-col w-col-6">
+                <div class="textdef">Choosing your own image?</div>
+                
+              </div>
+              <div class="w-col w-col-6 w-clearfix">
+                <input class="w-button button" type="submit" value="Upload" data-wait="Please wait...">
+              </div>
+            </div>
+          </div>
+          <div class="textnew">Using images here?</div>
+          <div class="w-slider" data-animation="slide" data-duration="500" data-delay="6000" data-autoplay="1" data-infinite="1">
+            <div class="w-slider-mask">
+              <% savelast5=@bookmarks.last(5) %>
+
+              <% savelast5.each do |im| %>
+
+              <div class="w-slide"><img class="impos"  src=<%= im.photo.url(:thumb) %>   >
+              </div>
+              <% end %>
+              <div class="w-slide"><img class="impos" src="/assets/images/hp.jpeg">
+              </div>
+              <div class="w-slide"><img class="impos" src="/assets/images/cry.jpeg">
+              </div>
+              <div class="w-slide"><img class="impos" src="/assets/images/angry.jpeg">
+              </div>
+              <div class="w-slide"><img class="impos" src="/assets/images/images.jpeg">
+              </div>
+              <div class="w-slide"><img class="impos" src="/assets/images/angry.jpeg">
+              </div>
+              <div class="w-slide"><img class="impos" src="/assets/images/hp.jpeg">
+              </div>
+            </div>
+            <div class="w-slider-arrow-left">
+              <div class="w-icon-slider-left"></div>
+            </div>
+            <div class="w-slider-arrow-right">
+              <div class="w-icon-slider-right"></div>
+            </div>
+            <div class="w-slider-nav"></div>
+          </div>
+        </form>
+        <div class="w-form-done success-message">
+          <p>Thanks! You have been added to our list.&nbsp;</p>
+          <p class="spread-word">Help spread the word!</p>
+          <div class="w-clearfix social-widget-wrapper">
+            <div class="w-widget w-widget-twitter social-widget">
+              <iframe src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=horizontal&amp;size=m&amp;dnt=true" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 110px; height: 20px;"></iframe>
+            </div>
+            <div class="w-widget w-widget-facebook social-widget">
+              <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=button_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false" scrolling="no" frameborder="0" allowtransparency="true" style="border: none; overflow: hidden; width: 90px; height: 20px;"></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="w-form-fail error-message">
+          <p>Oops! Something went wrong while submitting the form. :(</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>

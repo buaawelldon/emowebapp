@@ -1,0 +1,26 @@
+<%= form_for(@caminput) do |f| %>
+  <% if @caminput.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@caminput.errors.count, "error") %> prohibited this caminput from being saved:</h2>
+
+      <ul>
+      <% @caminput.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div >
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div >
+    <%= f.label :type %><br>
+    <%= f.text_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

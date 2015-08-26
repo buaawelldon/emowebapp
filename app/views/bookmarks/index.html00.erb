@@ -1,0 +1,42 @@
+<h1>Faces</h1>
+
+<table>
+<!--   <thead>
+    <tr>
+      <th>Title    </th>
+      <th>Names</th>
+      <th>Images</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead> -->
+
+
+<div style="color:#0000FF">
+<h3>
+<%= link_to 'Your Picture?', new_bookmark_path %>
+</h3>
+</div>
+
+
+<!--   <tbody>
+    <% @bookmarks.each do |bookmark| %>
+      <tr>
+        <td><%= image_tag bookmark.photo.url(:thumb) %></td>        
+        <td><%= link_to 'Show', bookmark %></td>
+        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+        <td><%= link_to 'Destroy', bookmark, method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody> -->
+      <td><%= image_tag @bookmarks.last.photo.url(:medium) %></td>  
+      <tr>
+              
+        <td><%= link_to 'Show', @bookmarks.last %></td>
+        <td><%= link_to 'Edit', edit_bookmark_path(@bookmarks.last) %></td>
+        <td><%= link_to 'Destroy', @bookmarks.last, method: :delete %></td>
+      </tr>
+
+</table>
+
+<br>
+

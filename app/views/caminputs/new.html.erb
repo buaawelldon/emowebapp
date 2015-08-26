@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CamIput...</title>
+  <link rel="stylesheet" href="webcam_style.css">
+</head>
+<body>
+  <div id="video-container">
+    <video id="camera-stream" width="500" autoplay></video>
+  </div>
+  <script src="webcam_script.js"></script>
+</body>
+<%= render 'form' %>
+
+<%= link_to 'Back', bookmarks_path %>

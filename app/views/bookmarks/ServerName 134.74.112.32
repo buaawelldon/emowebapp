@@ -1,0 +1,6 @@
+        ServerName 134.74.112.32
+        ServerAlias www.134.74.112.32
+        ServerAdmin webmaster@localhost
+        DocumentRoot /home/wei/Documents/RubyRails/bookmarks/public
+        RailsEnv development
+

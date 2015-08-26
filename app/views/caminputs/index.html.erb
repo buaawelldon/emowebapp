@@ -1,0 +1,27 @@
+<h1>Listing caminputs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @caminputs.each do |caminput| %>
+      <tr>
+        <td><%= caminput.username %></td>
+        <td><%= caminput.type %></td>
+        <td><%= link_to 'Show', caminput %></td>
+        <td><%= link_to 'Edit', edit_caminput_path(caminput) %></td>
+        <td><%= link_to 'Destroy', caminput, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Caminput', new_caminput_path %>

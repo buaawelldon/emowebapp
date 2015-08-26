@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @caminput.username %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @caminput.type %>
+</p>
+
+<%= link_to 'Edit', edit_caminput_path(@caminput) %> |
+<%= link_to 'Back', caminputs_path %>

@@ -1,31 +1,143 @@
-<h1>Faces</h1>
+<!DOCTYPE html>
+<!-- This site was created in Webflow. http://www.webflow.com-->
+<!-- Last Published: Wed Aug 12 2015 16:57:19 GMT+0000 (UTC) -->
+<html data-wf-site="55c3ccde32868f017b95dac4" data-wf-page="55c3ccde32868f017b95dac6">
+<head>
+  <meta charset="utf-8">
+  <title>CCVCL Emo Computing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="css/ccvcl-emo-computing.webflow.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Open Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic","Montserrat:400,700","Merriweather:300,400,700,900","Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic","Petit Formal Script:regular"]
+      }
+    });
+  </script>
+  
 
-<table>
-  <thead>
-    <tr>
-      <th>Title    </th>
-      <th>Names</th>
-      <th>Images</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.title %></td>
-        <td><%= bookmark.url %></td>
-        <div>
-        <td><%= image_tag bookmark.photo.url(:thumb) %></td>
+  <script type="text/javascript" src="js/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="images/CCVCL Logo With Glow (For Dark Background).png">
+  <link rel="apple-touch-icon" href="images/CCVCL Logo With Glow (For Dark Background).png">
+</head>
+<body>
+  <div class="w-section w-clearfix bars-wrapper">
+    <div class="bar"></div>
+    <div class="bar _2"></div>
+    <div class="bar _3"></div>
+    <div class="bar _4"></div>
+    <div class="bar _5"></div>
+    <div class="bar _6"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="w-section header-section">
+    <div class="w-container">
+      <div class="w-row">
+        <div class="w-col w-col-3"><img src="images/CCVCL Logo With Glow (For Dark Background).png" width="119">
         </div>
-        <td><%= link_to 'Show', bookmark %></td>
-        <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to 'Destroy', bookmark, method: :delete %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <div class="w-col w-col-9">
+          <div>
+            <h1><strong>Emotion Computing</strong></h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-container container">
+      <div class="w-form sign-up-form">
+        
+          <div>
+            <div class="w-row">
+              <div class="w-col w-col-6">
+                <div class="textdef">Choosing your own image,</div>
+              </div>
+              <div class="textdef">
+                <%= link_to 'Upload?', new_bookmark_path %>
+              </div>
+             
+            </div>
+          </div>
+          
+        
+        <div class="textnew">Using images here?</div>
+        
+      </div>
+      
 
-<br>
+      <div class="w-row">
+        
+        <div class="w-col w-col-2"><img src="images/C002642.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/F008901.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/C002603.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/C002602.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/G010543.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/B002042.jpg" >
+        </div>
 
-<%= link_to 'New Bookmark', new_bookmark_path %>
+        <div class="w-col w-col-2"><img src="images/E007079.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/E007089.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/E007019.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/A001669.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/F009096.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/D005565.jpg" >
+        </div>
+      </div>
+
+      <div class="w-row">
+        <div class="w-col w-col-2"><img src="images/A001284.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/F009001.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/G010552.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/B002014.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/G010537.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/D005584.jpg" >
+        </div>
+
+        <div class="w-col w-col-2"><img src="images/C002742.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/A001296.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/D005461.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/C002632.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/D005622.jpg" >
+        </div>
+        <div class="w-col w-col-2"><img src="images/G010589.jpg" >
+        </div>
+      </div>
+      
+      
+      <canvas width="320" id="onlineim" height="240"  style="display: inline;"></canvas>
+      <div>
+        <canvas width="320" id="onlineim2" height="240"  style="display: inline;"></canvas>
+      </div>
+    </div>
+  </div>
+  <div> 
+    
+
+
+  </div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
+  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</body>
+</html>
