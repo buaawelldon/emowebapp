@@ -1,4 +1,1 @@
-json.array!(@caminputs) do |caminput|
-  json.extract! caminput, :id, :username, :type
-  json.url caminput_url(caminput, format: :json)
-end
+json.extract! @thiselment,  :created_at, :updated_at, :angry, :disgust, :fear, :happy, :neutral, :sad, :surprise 
