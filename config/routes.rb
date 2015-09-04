@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :usergames
+
   resources :caminputs
 
   resources :bookmarks

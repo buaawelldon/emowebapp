@@ -1,0 +1,35 @@
+<h1>Listing usergames</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Score</th>
+      <th>Rank</th>
+      <th>Ft</th>
+      <th>Path</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usergames.each do |usergame| %>
+      <tr>
+        <td><%= usergame.name %></td>
+        <td><%= usergame.email %></td>
+        <td><%= usergame.score %></td>
+        <td><%= usergame.rank %></td>
+        <td><%= usergame.ft %></td>
+        <td><%= usergame.path %></td>
+        <td><%= link_to 'Show', usergame %></td>
+        <td><%= link_to 'Edit', edit_usergame_path(usergame) %></td>
+        <td><%= link_to 'Destroy', usergame, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usergame', new_usergame_path %>

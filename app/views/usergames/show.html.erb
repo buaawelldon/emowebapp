@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @usergame.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @usergame.email %>
+</p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @usergame.score %>
+</p>
+
+<p>
+  <strong>Rank:</strong>
+  <%= @usergame.rank %>
+</p>
+
+<p>
+  <strong>Ft:</strong>
+  <%= @usergame.ft %>
+</p>
+
+<p>
+  <strong>Path:</strong>
+  <%= @usergame.path %>
+</p>
+
+<%= link_to 'Edit', edit_usergame_path(@usergame) %> |
+<%= link_to 'Back', usergames_path %>

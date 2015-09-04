@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826194406) do
+ActiveRecord::Schema.define(version: 20150904183659) do
 
   create_table "bookmarks", force: true do |t|
     t.string   "title"
@@ -45,6 +45,17 @@ ActiveRecord::Schema.define(version: 20150826194406) do
     t.string   "sad"
     t.string   "surprise"
     t.text     "canv"
+  end
+
+  create_table "usergames", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "score"
+    t.string   "rank"
+    t.text     "ft"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

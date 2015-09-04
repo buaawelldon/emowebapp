@@ -50,13 +50,13 @@ class CaminputsController < ApplicationController
       #if @caminput.save
 
         @caminput.attributes={angry:h["Angry"], disgust:h["Disgust"], fear:h["Fear"], happy: h["Happy"], neutral:h["Neutral"], sad:h["Sad"], surprise:h["Surprise"]}
-        Caminput.last.update(angry:h["Angry"])
-        Caminput.last.update(disgust:h["Disgust"])
-        Caminput.last.update(fear:h["Fear"])
-        Caminput.last.update(happy: h["Happy"])
-        Caminput.last.update(neutral:h["Neutral"])
-        Caminput.last.update(sad:h["Sad"])
-        Caminput.last.update(surprise:h["Surprise"])
+        # Caminput.last.update(angry:h["Angry"])
+        # Caminput.last.update(disgust:h["Disgust"])
+        # Caminput.last.update(fear:h["Fear"])
+        # Caminput.last.update(happy: h["Happy"])
+        # Caminput.last.update(neutral:h["Neutral"])
+        # Caminput.last.update(sad:h["Sad"])
+        # Caminput.last.update(surprise:h["Surprise"])
         #format.html 
         format.html { redirect_to new_caminput_url, notice: 'Caminput was successfully created.' }
         format.json { render :show, status: :created, location: @caminput }
