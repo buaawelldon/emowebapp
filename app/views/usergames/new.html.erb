@@ -1,5 +1,100 @@
-<h1>New usergame</h1>
 
-<%= render 'form' %>
+<head>
+  <meta charset="utf-8">
+  <title>New User Register...</title>
+  <link rel="stylesheet" href="webcam_style.css">
+</head>
 
+<body>
+  <h3>New User Register...</h3>
+</body>
+
+
+<video id="live" width="320" height="240" autoplay style="display: none;"></video>
+<canvas width="320" id="canvas" height="240"  style="display: none;"></canvas>
+<img src='/images/backgr.jpg'   id='backimg' width="1200" height="500" style="display: none;"/>
+
+<div id='user'>
+	<canvas id='mainsc' width="1200" height="500"  style="display: inline">The text is shown here if your browser doesn't support CANVAS, he he da</canvas>
+</div>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+ <script type="text/javascript">
+    navigator.getUserMedia = (navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia || 
+                            navigator.msGetUserMedia);
+
+
+    var vid = $("#live").get()[0];
+    var canvas = $("#canvas");
+    var context = canvas.get()[0].getContext('2d');
+    var maincanv=$("#mainsc").get()[0].getContext('2d');
+    var maindr=$("#mainsc").get()[0];
+	var backgr=$('#backimg').get()[0];
+if (navigator.getUserMedia) {
+  // Request the camera.
+  navigator.getUserMedia(
+    // Constraints
+    {
+      video: true
+    },
+
+    // Success Callback
+    function(localMediaStream) {
+        // Get a reference to the video element on the page.
+        
+
+        // Create an object URL for the video stream and use this 
+        // to set the video source.
+        vid.src = window.URL.createObjectURL(localMediaStream);
+    },
+
+    //
+    // Error Callback
+    function(err) {
+      // Log the error to the console.
+      console.log('The following error occurred when trying to use getUserMedia: ' + err);
+    }
+  );
+
+}
+
+    timer = setInterval(
+        function () {
+            context.drawImage(vid, 0, 0, 320, 240);
+            var canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+            //document.getElementById('imgurl').innerHTML=canv_str;                
+        }, 100);
+    timer2 = setInterval(
+        function () {
+        	maincanv.drawImage(backgr, 0, 0, 1200, 500);
+            maincanv.drawImage(vid, 0, 0, 300, 250);
+            maincanv.beginPath();
+            maincanv.fillStyle='white';
+            maincanv.rect(0,248,1200,4)
+            maincanv.rect(298,0,4,500)
+            maincanv.rect(598,0,4,500)
+            maincanv.rect(898,0,4,500)
+            maincanv.fill()
+        }, 200);
+
+</script>
+<%= form_for(@usergame) do |f| %>
+  <% if @usergame.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@usergame.errors.count, "error") %> prohibited this usergame from being saved:</h2>
+
+      <ul>
+      <% @usergame.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 <%= link_to 'Back', usergames_path %>
