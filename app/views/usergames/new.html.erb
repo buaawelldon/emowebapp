@@ -9,13 +9,13 @@
   <h3>New User Register...</h3>
 </body>
 
-
+<p>click the emotions capture button to get your registered face for the game, your live frame is shown in the first window</p>
 <video id="live" width="320" height="240" autoplay style="display: none;"></video>
 <canvas width="320" id="canvas" height="240"  style="display: none;"></canvas>
 <img src='/images/backgr.jpg'   id='backimg' width="1200" height="500" style="display: none;"/>
 
 <div id='user'>
-	<canvas id='mainsc' width="1200" height="500"  style="display: inline">The text is shown here if your browser doesn't support CANVAS, he he da</canvas>
+  <canvas id='mainsc' width="1200" height="500"  style="display: inline">The text is shown here if your browser doesn't support CANVAS, he he da</canvas>
 </div>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -32,7 +32,8 @@
     var context = canvas.get()[0].getContext('2d');
     var maincanv=$("#mainsc").get()[0].getContext('2d');
     var maindr=$("#mainsc").get()[0];
-	var backgr=$('#backimg').get()[0];
+  var backgr=$('#backimg').get()[0];
+  
 if (navigator.getUserMedia) {
   // Request the camera.
   navigator.getUserMedia(
@@ -69,8 +70,13 @@ if (navigator.getUserMedia) {
         }, 100);
     timer2 = setInterval(
         function () {
-        	maincanv.drawImage(backgr, 0, 0, 1200, 500);
-            maincanv.drawImage(vid, 0, 0, 300, 250);
+          if (first_shown)
+          {
+            maincanv.drawImage(backgr, 0, 0, 1200, 500);
+              first_shown=false;
+          }
+          maincanv.drawImage(vid, 0, 0, 300, 250);
+                        
             maincanv.beginPath();
             maincanv.fillStyle='white';
             maincanv.rect(0,248,1200,4)
@@ -78,23 +84,103 @@ if (navigator.getUserMedia) {
             maincanv.rect(598,0,4,500)
             maincanv.rect(898,0,4,500)
             maincanv.fill()
+
         }, 200);
+var fm1='emostr';
+var fm2='emostr';
+var fm3='emostr';
+var fm4='emostr';
+var fm5='emostr';
+var fm6='emostr';
+var fm7='emostr';
+var first_shown=true;
+$("#mainsc").get()[0].addEventListener("click", function(event){
+      // document.getElementById("emoid").innerHTML = "Hello World";
+  var rect = maindr.getBoundingClientRect(); 
+      txtY=event.pageY-rect.top;
+      txtX=event.pageX-rect.left;
+        //$("span").text("X: " + txtX + ", Y: " + txtY ); 
+    //check the mouse position to decide which image to show
+  if (txtX>300&&txtX<600&&txtY>0&&txtY<250)
+  {
+    maincanv.drawImage(vid, 300, 0, 300, 250);
+    fm1 = canv_str;
+    $('#usergame_ft1').attr('value',fm1)      
+  }
+  if (txtX>600&&txtX<900&&txtY>0&&txtY<250)
+  {
+    maincanv.drawImage(vid, 600, 0, 300, 250);
+    fm2 = canv_str;     
+    $('#usergame_ft2').attr('value',fm2)
+  }
+  if (txtX>900&&txtX<1200&&txtY>0&&txtY<250)
+  {
+    maincanv.drawImage(vid, 900, 0, 300, 250);
+    fm3 = canv_str;     
+    $('#usergame_ft3').attr('value',fm3)
+  }
+  if (txtX>0&&txtX<300&&txtY>250&&txtY<500)
+  {
+    maincanv.drawImage(vid, 0, 250, 300, 250);
+    fm4 = canv_str;     
+    $('#usergame_ft4').attr('value',fm4)
+  }
+  if (txtX>300&&txtX<600&&txtY>250&&txtY<500)
+  {
+    maincanv.drawImage(vid, 300, 250, 300, 250);
+    fm5 = canv_str;    
+    $('#usergame_ft5').attr('value',fm5)  
+  }
+  if (txtX>600&&txtX<900&&txtY>250&&txtY<500)
+  {
+    maincanv.drawImage(vid, 600, 250, 300, 250);
+    fm6 = canv_str;     
+    $('#usergame_ft6').attr('value',fm6)
+  }
+  if (txtX>900&&txtX<1200&&txtY>250&&txtY<500)
+  {
+    maincanv.drawImage(vid, 900, 250, 300, 250);
+    fm7 = canv_str;     
+    $('#usergame_ft7').attr('value',fm7)
+  }
+   
+    });
 
+// $(document).ready(function(){
+//     $(document.getElementById('mainsc')).mousemove(function(event){
+//      var rect = maindr.getBoundingClientRect(); 
+//      txtY=event.pageY-rect.top;
+//      txtX=event.pageX-rect.left;
+//         $("span").text("X: " + txtX + ", Y: " + txtY ); 
+//     });
+// });
 </script>
-<%= form_for(@usergame) do |f| %>
-  <% if @usergame.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@usergame.errors.count, "error") %> prohibited this usergame from being saved:</h2>
+<p>The mouse pointer position is at: <span></span></p>
 
-      <ul>
-      <% @usergame.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= form_for(@usergame) do |f| %>
+
 <div class="actions">
+
+
+<p><%= f.hidden_field :ft1 %></p>
+<p><%= f.hidden_field :ft2 %></p>
+<p><%= f.hidden_field :ft3 %></p>
+<p><%= f.hidden_field :ft4 %></p>
+<p><%= f.hidden_field :ft5 %></p>
+<p><%= f.hidden_field :ft6 %></p>
+<p><%= f.hidden_field :ft7 %></p>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </p>
+<p>
     <%= f.submit %>
+</p>
   </div>
 <% end %>
-<%= link_to 'Back', usergames_path %>
+<%= link_to 'Back', usergamess_path %>
+
