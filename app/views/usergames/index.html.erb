@@ -1,35 +1,281 @@
-<h1>Listing usergames</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CamIput...</title>
+  <link rel="stylesheet" href="webcam_style.css">
+</head>
+<!-- <body>
+  <h3>CamIput...</h3>
+</body> -->
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Score</th>
-      <th>Rank</th>
-      <th>Ft</th>
-      <th>Path</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- <div> -->
+    <video id="live" width="320" height="240" autoplay style="display: none;"></video>
+    <canvas width="320" id="canvas" height="240"  style="display: none;"></canvas>
+    <canvas width="320" id="result" height="240"  style="display: none;"></canvas>
+    <img src='/images/base.jpg' id='baseimg' width="320" height="240" style="display: none;"/>
+    <video id='backmusic' style="display:none">
+      <source src='/music/supermario.mp3' type="audio/mpeg">
+    </video>
+    <video id='gameov' style="display:none">
+      <source src='/music/gameover.mp3' type="audio/mpeg">
+    </video>
+    <video id='eff' style="display:none">
+      <source src='/music/effect_cutted.mp3' type="audio/mpeg">
+    </video>
+<!-- </div> -->
+<h3>Game Scene</h3>
+<div id='playid'>
+Playername: 
+</div>
+<form>
+<input type='text' name='thename' id='nameid'><br>
+</form>
+<button onclick='clickname()' id='namebutton'>ChangeName</button>
+<img src='/images/backgr.jpg'   id='backimg' width="960" height="720" style="display: none;"/>
+<img src='/images/angry.jpeg'   id='ang' width="25" height="25" style="display: none;"/>
+<img src='/images/dislike.png'  id='dis' width="25" height="25" style="display: none;"/>
+<img src='/images/fear.png'     id='fea' width="25" height="25" style="display: none;"/>
+<img src='/images/hp.jpg'       id='hap' width="25" height="25" style="display: none;"/>
+<img src='/images/neutral.jpg'  id='neu' width="25" height="25" style="display: none;"/>
+<img src='/images/cry.jpeg'     id='sad' width="25" height="25" style="display: none;"/>
+<img src='/images/surp.jpg'     id='sup' width="25" height="25" style="display: none;"/>
+<img src='/images/redh.jpeg'     id='redh' width="25" height="25" style="display: none;"/>
+<img src='/images/coin.jpg'     id='coin' width="25" height="25" style="display: none;"/>
+<img src='/images/over.jpg'     id='gg' width="25" height="25" style="display: none;"/>
+<!-- 
+<div id='link2reg'>
+<a href='/caminputs/'><font size='4' color='red'>Emotion not correct? register your own emotion to play ?</a>
+</div> -->
+<font size='2' color='black'>
+<div>
+<canvas id='maincv' width="960" height="720"  style="display: inline;">The text is shown here if your browser doesn't support CANVAS, he he da</canvas>
+ </div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-  <tbody>
-    <% @usergames.each do |usergame| %>
-      <tr>
-        <td><%= usergame.name %></td>
-        <td><%= usergame.email %></td>
-        <td><%= usergame.score %></td>
-        <td><%= usergame.rank %></td>
-        <td><%= usergame.ft %></td>
-        <td><%= usergame.path %></td>
-        <td><%= link_to 'Show', usergame %></td>
-        <td><%= link_to 'Edit', edit_usergame_path(usergame) %></td>
-        <td><%= link_to 'Destroy', usergame, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+ <script type="text/javascript">
+    navigator.getUserMedia = (navigator.getUserMedia ||
+                            navigator.webkitGetUserMedia ||
+                            navigator.mozGetUserMedia || 
+                            navigator.msGetUserMedia);
 
-<br>
 
-<%= link_to 'New Usergame', new_usergame_path %>
+    var vid = $("#live").get()[0];
+    var canvas = $("#canvas");
+    var context = canvas.get()[0].getContext('2d');
+    var redlife=$('#redh').get()[0];
+    var coinim=$('#coin').get()[0];
+    var ggim=$('#gg').get()[0];  
+    var maincanv=document.getElementById('maincv');  
+    var render_flag=0;
+    document.getElementById('backmusic').loop=false
+    document.getElementById('gameov').loop=false
+    bkplay=document.getElementById('backmusic')
+    ovplay=document.getElementById('gameov')
+    effplay=document.getElementById('eff')
+if (navigator.getUserMedia) {
+  // Request the camera.
+  navigator.getUserMedia(
+    // Constraints
+    {
+      video: true
+    },
+
+    // Success Callback
+    function(localMediaStream) {
+        // Get a reference to the video element on the page.
+        
+
+        // Create an object URL for the video stream and use this 
+        // to set the video source.
+        vid.src = window.URL.createObjectURL(localMediaStream);
+    },
+
+    //
+    // Error Callback
+    function(err) {
+      // Log the error to the console.
+      console.log('The following error occurred when trying to use getUserMedia: ' + err);
+    }
+  );
+
+}
+        timer = setInterval(
+            function () {
+                context.drawImage(vid, 0, 0, 320, 240);
+                var canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+                //document.getElementById('imgurl').innerHTML=canv_str;
+               $('#usergame_ft').attr('value',canv_str)
+
+                
+            }, 100);
+        timer2=setInterval(function(){
+          var backgr=$('#backimg').get()[0];
+          var maintx=$('#maincv').get()[0].getContext('2d');
+          maintx.drawImage(backgr,0,0,960,720);
+          maintx.drawImage(vid, 0, 0, 160, 120);
+          status_cnt+=1;
+          
+          if (status_cnt>20 && game_status==0)
+            {game_status=1;}
+          
+          if (game_status==0)
+          {
+            var nmtxt=Math.floor((20-status_cnt)/5);
+            maintx.font="100px Georgia";
+            maintx.fillStyle='red'
+            maintx.fillText(nmtxt.toString(),460,250);
+          }
+          if (game_status==1)
+          {
+            bkplay.play()
+            if (game_life>0)
+            {
+              showlife(maintx);
+              showobj(maintx);  
+            }
+            if(game_life==0)
+            {
+              bkplay.pause()
+              ovplay.play()
+              game_status=2
+              maintx.drawImage(ggim,280,160,400,200);
+            }
+
+          }
+          if(game_status==2)
+          {
+            maintx.font="40px Georgia";
+            maintx.fillStyle='black'
+            maintx.fillText('Your final score: '+game_score.toString()+', great!',280,400); 
+            maintx.font="50px Georgia";
+            maintx.fillStyle='red'
+            maintx.fillText('click to play again',280,450); 
+            maintx.drawImage(ggim,280,160,400,200);
+
+          }
+          maintx.font="40px Georgia";
+          maintx.fillText('Score: '+game_score.toString(),700,50);
+
+        },300);
+        time3=setInterval(
+          function () {
+            //context.drawImage(vid, 0, 0, 320, 240);
+            var canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+            $.ajax({
+              type: "POST",
+              url: '/usergames',
+              data: {usergame: {name:$('#playid').text() ,stat: 'game',ft:canv_str}},
+              dataType: "script"
+              }
+            )},1000);
+
+                
+   //////////////////////////////////
+   //Game part
+
+   //1. define some class for games
+   //the game controlling variables
+   var original_life=5;
+   var game_life=original_life;
+   var game_obj=3;
+   var obj_pos=[480,50];
+   var game_status=0;//0: to begin 1: playing 2:stop
+   var game_emoid=3;
+   var objicon=$('#hap').get()[0];
+   var status_cnt=0;
+   var stop_delay=0;
+   var game_score=0;
+   function showlife(maintx){
+    for (var i = 0; i < game_life; i++) 
+    {
+      maintx.drawImage(redlife,20+i*45,650,40,40)   
+    };
+   }
+   function showobj(maintx){
+    //select a icon to show, first just make it happy
+    
+    
+    emopr=$('#emoid').text()
+    if(parseInt(emopr)==game_emoid)
+      {
+        effplay.play()
+        game_score+=1
+        obj_pos[1]=50
+        repickicon();
+      }
+    maintx.drawImage(objicon,obj_pos[0],obj_pos[1],50,50)
+    obj_pos[1]+=30;
+    if(obj_pos[1]>600)
+    {
+      obj_pos[1]=50;
+      repickicon();
+      game_life-=1;
+    } 
+   }
+
+   function repickicon(){
+    game_emoid=Math.floor(Math.random()*7)
+        switch (game_emoid)
+        {
+          case 0:
+            objicon=$('#ang').get()[0];
+          break;
+          case 1:
+            objicon=$('#dis').get()[0];
+          break;
+          case 2:
+            objicon=$('#fea').get()[0];
+          break;
+          case 3:
+            objicon=$('#hap').get()[0];
+          break;
+          case 4:
+            objicon=$('#neu').get()[0];
+          break;
+          case 5:
+            objicon=$('#sad').get()[0];
+          break;
+          case 6:
+            objicon=$('#sup').get()[0];
+          break;  
+        }
+   }
+
+   //click to replay function just make game_status=0
+   // document.addEventListener('click',function(){
+   //  document.getElementById('emoid').innerHTML()='clicked'
+   //  // var mx=event.pageX-maincanv.offsetLeft,
+   //  // my=event.pageY-maincanv.offsetTop;
+   //  // if(mx>0&&my>0&&mx<960&&my<720)
+   //  // {
+   //  //   game_status=0;
+
+   //  // }
+   // });
+    document.getElementById("maincv").addEventListener("click", function(){
+      // document.getElementById("emoid").innerHTML = "Hello World";
+      if (game_status==2)
+      {
+        game_status=0;
+        status_cnt=0;
+        game_life=original_life;
+        game_score=0;
+      }
+      
+    });
+    function clickname(){
+      $('#playid').text(document.getElementById('nameid').value)    
+    }
+// $('#playid').text('string')
+</script>
+
+
+
+<div>Emotion Scores For:</div>
+<div> Angry | Disgust | Fear | Happy | Neutral | Sad | Surprise</div>
+<div id="feedback">score to show</div>
+<div id='emoid'>'0'</div>
+<div id='camid'>
+<%= link_to 'Back', usergames_path %>
+</div>

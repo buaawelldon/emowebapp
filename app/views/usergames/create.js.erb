@@ -1,0 +1,48 @@
+
+
+var scr=[0.0,0.0,0.0,0.0,0.0,0.0,0.0];
+scr[0]=parseFloat('<%= @usergame.angry%>');
+scr[1]=parseFloat('<%= @usergame.disgust%>');
+scr[2]=parseFloat('<%= @usergame.fear%>');
+scr[3]=parseFloat('<%= @usergame.happy%>');
+scr[4]=parseFloat('<%= @usergame.neutral%>');
+scr[5]=parseFloat('<%= @usergame.sad%>');
+scr[6]=parseFloat('<%= @usergame.surprise%>');
+scdemo=100;
+maxind=0;
+$('#playid').text('<%= @usergame.name%>')
+// $('#playid').text('string2')
+for (var i = 0; i < scr.length; i++)
+{
+	if (scr[i]<scdemo)
+	{
+		maxind=i;
+		scdemo=scr[i];
+	}
+}
+if (scr[0]==0&scr[3]==0&&scr[4]==0)
+{$('#emoid').text('8')}
+else
+{$('#emoid').text(maxind.toString())}
+//draw rectangles
+
+
+// if (scr[0]>0 && scr[3]>0)
+// {
+// 	var res=$('#result').get()[0];
+// 	ctxres=res.getContext('2d');
+// 	var resim=$('#baseimg').get()[0]
+// 	ctxres.drawImage(resim,0,0,320,240);
+
+
+
+// 	for (var i = 0; i < scr.length; i++) {
+// 		s=scr[i];
+// 		ctxres.beginPath();
+// 		ctxres.fillStyle='blue'
+// 		x=40*(i+1)-25;
+// 		ctxres.rect(x,201-Math.round(200*s),25,Math.round(200*s));
+// 		ctxres.fill()
+
+// 	};
+// }

@@ -5,6 +5,8 @@ class CreateUsergames < ActiveRecord::Migration
       t.string :email
       t.string :score
       t.string :rank
+      t.string :stat
+      t.text :ft
       t.text :ft1
       t.text :ft2
       t.text :ft3
@@ -19,8 +21,6 @@ class CreateUsergames < ActiveRecord::Migration
       t.string :path5
       t.string :path6
       t.string :path7
-
-      t.timestamps
-    end
+	end    
   end
 end

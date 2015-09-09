@@ -1,9 +1,7 @@
 class AddAttachmentPhotoToBookmarks < ActiveRecord::Migration
   def self.up
-    create_table :bookmarks do |t|
+    change_table :bookmarks do |t|
       t.attachment :photo
-      t.string :title
-      t.string :url
     end
   end
 

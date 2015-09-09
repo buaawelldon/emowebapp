@@ -32,6 +32,7 @@
     var context = canvas.get()[0].getContext('2d');
     var maincanv=$("#mainsc").get()[0].getContext('2d');
     var maindr=$("#mainsc").get()[0];
+    var canv_str='emostr';
   var backgr=$('#backimg').get()[0];
   
 if (navigator.getUserMedia) {
@@ -65,7 +66,7 @@ if (navigator.getUserMedia) {
     timer = setInterval(
         function () {
             context.drawImage(vid, 0, 0, 320, 240);
-            var canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+            canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
             //document.getElementById('imgurl').innerHTML=canv_str;                
         }, 100);
     timer2 = setInterval(
@@ -83,6 +84,31 @@ if (navigator.getUserMedia) {
             maincanv.rect(298,0,4,500)
             maincanv.rect(598,0,4,500)
             maincanv.rect(898,0,4,500)
+
+            maincanv.font="20px Arial";
+            // maincanv.fillStyle='black'
+
+          if (showim1)
+            maincanv.fillText('Show Angry face and click',320,100);
+
+          if (showim2)
+            maincanv.fillText('Show Disgust face and click',620,100)
+
+          if (showim3)
+            maincanv.fillText('Show Fear face and click',920,100)
+
+          if (showim4)
+            maincanv.fillText('Show Happy face and click',20,350)
+
+          if (showim5)
+            maincanv.fillText('Show Neutral face and click',320,350)
+
+          if (showim6)
+            maincanv.fillText('Show Sad face and click',620,350)
+
+          if (showim7)
+            maincanv.fillText('Show Surprise face and click',920,350)
+
             maincanv.fill()
 
         }, 200);
@@ -93,6 +119,14 @@ var fm4='emostr';
 var fm5='emostr';
 var fm6='emostr';
 var fm7='emostr';
+var showim1=true;
+var showim2=true;
+var showim3=true;
+var showim4=true;
+var showim5=true;
+var showim6=true;
+var showim7=true;
+
 var first_shown=true;
 $("#mainsc").get()[0].addEventListener("click", function(event){
       // document.getElementById("emoid").innerHTML = "Hello World";
@@ -105,43 +139,50 @@ $("#mainsc").get()[0].addEventListener("click", function(event){
   {
     maincanv.drawImage(vid, 300, 0, 300, 250);
     fm1 = canv_str;
-    $('#usergame_ft1').attr('value',fm1)      
+    $('#usergame_ft1').attr('value',canv_str)
+    showim1=false      
   }
   if (txtX>600&&txtX<900&&txtY>0&&txtY<250)
   {
     maincanv.drawImage(vid, 600, 0, 300, 250);
     fm2 = canv_str;     
-    $('#usergame_ft2').attr('value',fm2)
+    $('#usergame_ft2').attr('value',canv_str)
+    showim2=false
   }
   if (txtX>900&&txtX<1200&&txtY>0&&txtY<250)
   {
     maincanv.drawImage(vid, 900, 0, 300, 250);
     fm3 = canv_str;     
     $('#usergame_ft3').attr('value',fm3)
+    showim3=false
   }
   if (txtX>0&&txtX<300&&txtY>250&&txtY<500)
   {
     maincanv.drawImage(vid, 0, 250, 300, 250);
     fm4 = canv_str;     
     $('#usergame_ft4').attr('value',fm4)
+    showim4=false
   }
   if (txtX>300&&txtX<600&&txtY>250&&txtY<500)
   {
     maincanv.drawImage(vid, 300, 250, 300, 250);
     fm5 = canv_str;    
     $('#usergame_ft5').attr('value',fm5)  
+    showim5=false
   }
   if (txtX>600&&txtX<900&&txtY>250&&txtY<500)
   {
     maincanv.drawImage(vid, 600, 250, 300, 250);
     fm6 = canv_str;     
     $('#usergame_ft6').attr('value',fm6)
+    showim6=false
   }
   if (txtX>900&&txtX<1200&&txtY>250&&txtY<500)
   {
     maincanv.drawImage(vid, 900, 250, 300, 250);
     fm7 = canv_str;     
     $('#usergame_ft7').attr('value',fm7)
+    showim7=false
   }
    
     });
@@ -182,5 +223,5 @@ $("#mainsc").get()[0].addEventListener("click", function(event){
 </p>
   </div>
 <% end %>
-<%= link_to 'Back', usergamess_path %>
+<%= link_to 'Back', usergames_path %>
 

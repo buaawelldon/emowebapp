@@ -1,21 +1,9 @@
-<%= form_for(@usergame) do |f| %>
-  <% if @usergame.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@usergame.errors.count, "error") %> prohibited this usergame from being saved:</h2>
-
-      <ul>
-      <% @usergame.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_for(@usergame,  remote:true) do |f| %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
+<!--   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
@@ -31,11 +19,7 @@
     <%= f.label :ft %><br>
     <%= f.text_area :ft %>
   </div>
-  <div class="field">
-    <%= f.label :path %><br>
-    <%= f.text_field :path %>
-  </div>
   <div class="actions">
     <%= f.submit %>
-  </div>
+  </div> -->
 <% end %>
