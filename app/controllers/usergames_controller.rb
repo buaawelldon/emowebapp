@@ -29,72 +29,72 @@ class UsergamesController < ApplicationController
     require 'base64'
     if @usergame.stat!='game'
       require 'fileutils'
-      FileUtils::mkdir_p "#{Rails.root}/public/images/#{@usergame.name}/"
+      FileUtils::mkdir_p "#{Rails.root}/public/assets/images/#{@usergame.name}/"
       data = @usergame.ft1
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
         
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test1.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test1.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test1.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test1.jpg 134.74.112.32:2501)
       
       data = @usergame.ft2
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test2.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test2.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test2.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test2.jpg 134.74.112.32:2501)
       
       data = @usergame.ft3
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test3.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test3.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test3.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test3.jpg 134.74.112.32:2501)
 
       data = @usergame.ft4
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test4.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test4.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test4.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test4.jpg 134.74.112.32:2501)
 
       data = @usergame.ft5
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test5.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test5.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test5.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test5.jpg 134.74.112.32:2501)
 
       data = @usergame.ft6
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test6.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test6.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test6.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test6.jpg 134.74.112.32:2501)
 
       data = @usergame.ft7
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/#{@usergame.name}/test7.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test7.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
     end
     if @usergame.stat=='game'
       # if true
       data = @usergame.ft
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
 
-        File.open("#{Rails.root}/public/images/test.jpg", 'wb') do |f|
+        File.open("#{Rails.root}/public/assets/images/test.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/test.jpgADD#{@usergame.name} 134.74.112.32:2502)
+        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/test.jpgADD#{@usergame.name} 134.74.112.32:2502)
         
         
     end
