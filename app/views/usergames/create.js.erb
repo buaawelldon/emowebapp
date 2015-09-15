@@ -20,10 +20,16 @@ for (var i = 0; i < scr.length; i++)
 		scdemo=scr[i];
 	}
 }
+str_stat='<%=@usergame.stat%>'
+$('#backst').text(str_stat)
 if (scr[0]==0&scr[3]==0&&scr[4]==0)
-{$('#emoid').text('8')}
+{$('#emoid').text('str_stat')}
 else
 {$('#emoid').text(maxind.toString())}
+
+
+//if not register correctly do something here
+
 //draw rectangles
 
 

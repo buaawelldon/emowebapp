@@ -40,7 +40,7 @@ class CaminputsController < ApplicationController
         f.write image_data
       end
 
-      %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/images/test.jpg 134.74.112.32:2500) 
+      %x(curl --data  #{Rails.root}/public/images/test.jpg 134.74.112.32:2500) 
 
       file=File.read('/home/wei/Documents/pythontool/data.json')
         h=JSON.parse(file)

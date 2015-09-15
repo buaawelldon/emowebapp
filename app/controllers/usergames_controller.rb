@@ -22,6 +22,11 @@ class UsergamesController < ApplicationController
   def edit
   end
 
+  def facerect
+    @usergame = Usergame.new(usergame_params)
+
+
+  end
   # POST /usergames
   # POST /usergames.json
   def create
@@ -36,7 +41,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test1.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test1.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test1.jpg 134.74.112.32:2501)
       
       data = @usergame.ft2
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -44,7 +49,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test2.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test2.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test2.jpg 134.74.112.32:2501)
       
       data = @usergame.ft3
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -52,7 +57,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test3.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test3.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test3.jpg 134.74.112.32:2501)
 
       data = @usergame.ft4
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -60,7 +65,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test4.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test4.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test4.jpg 134.74.112.32:2501)
 
       data = @usergame.ft5
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -68,7 +73,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test5.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test5.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test5.jpg 134.74.112.32:2501)
 
       data = @usergame.ft6
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -76,7 +81,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test6.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test6.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test6.jpg 134.74.112.32:2501)
 
       data = @usergame.ft7
       image_data = Base64.decode64(data['data:image/jpeg;base64,'.length .. -1])
@@ -84,7 +89,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/#{@usergame.name}/test7.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
+        %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
     end
     if @usergame.stat=='game'
       # if true
@@ -94,7 +99,7 @@ class UsergamesController < ApplicationController
         File.open("#{Rails.root}/public/assets/images/test.jpg", 'wb') do |f|
           f.write image_data
         end
-        %x(curl --data  /home/wei/Documents/RubyRails/bookmarks/public/assets/images/test.jpgADD#{@usergame.name} 134.74.112.32:2502)
+        %x(curl --data  #{Rails.root}/public/assets/images/test.jpgADD#{@usergame.name} 134.74.112.32:2502)
         
         
     end
@@ -102,13 +107,26 @@ class UsergamesController < ApplicationController
     file=File.read('/home/wei/Documents/pythontool/ownft.json')
         h=JSON.parse(file)  
         @usergame.attributes={angry:h["Angry"], disgust:h["Disgust"], fear:h["Fear"], happy: h["Happy"], neutral:h["Neutral"], sad:h["Sad"], surprise:h["Surprise"]}
+    varst=''
+    for i in 1..7
+        file=File.read('/home/wei/Documents/pythontool/test'+i.to_s+'.json')
+        h=JSON.parse(file)
+        varst+=h['flag']
+    end
 
+    @usergame.stat=varst
 
     respond_to do |format|
       # if @usergame.save
-        format.html { redirect_to usergames_url, notice: 'Usergame was successfully created.' }
-        format.json { render :show, status: :created, location: @usergame }
         format.js
+        if varst!='1111111'
+          format.html { redirect_to new_usergame_url}
+        end
+        if varst=='1111111'
+          format.html { redirect_to usergames_url, notice: 'Usergame was successfully created.' }
+        end
+        format.json { render :new,status: :ok, usergame: @usergame}
+      # end  
       # else
       #   format.html { render :new }
       #   format.json { render json: @usergame.errors, status: :unprocessable_entity }
@@ -143,7 +161,7 @@ class UsergamesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_usergame
-      @usergame = Usergame.find(params[:id])
+      @usergame = Usergame.find(params[:name])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

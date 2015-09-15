@@ -67,6 +67,7 @@ if (navigator.getUserMedia) {
         function () {
             context.drawImage(vid, 0, 0, 320, 240);
             canv_str = canvas.get()[0].toDataURL('image/jpeg', 1.0);
+            $('#playid').text(document.getElementById('usergame_name').value)
             //document.getElementById('imgurl').innerHTML=canv_str;                
         }, 100);
     timer2 = setInterval(
@@ -195,33 +196,31 @@ $("#mainsc").get()[0].addEventListener("click", function(event){
 //         $("span").text("X: " + txtX + ", Y: " + txtY ); 
 //     });
 // });
+
+function sendRGdata() {
+            //context.drawImage(vid, 0, 0, 320, 240);
+            
+            $.ajax({
+              type: "POST",
+              url: '/usergames',
+              data: {usergame: { stat: 'rg',ft1: fm1,ft2: fm2,ft3: fm3,ft4: fm4,ft5: fm5,
+              ft6: fm6,ft7: fm7,email:document.getElementById('emailbox').value,
+              name:document.getElementById('namebox').value}},
+              dataType: "script"
+              }
+            )}
+
 </script>
 <p>The mouse pointer position is at: <span></span></p>
 
-<%= form_for(@usergame) do |f| %>
 
-<div class="actions">
-
-
-<p><%= f.hidden_field :ft1 %></p>
-<p><%= f.hidden_field :ft2 %></p>
-<p><%= f.hidden_field :ft3 %></p>
-<p><%= f.hidden_field :ft4 %></p>
-<p><%= f.hidden_field :ft5 %></p>
-<p><%= f.hidden_field :ft6 %></p>
-<p><%= f.hidden_field :ft7 %></p>
-  <p>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
-<p>
-    <%= f.submit %>
-</p>
-  </div>
-<% end %>
+<form>
+<div>Name</div>
+<input type='text' name='thename' id='namebox'><br>
+<div>Email</div>
+<input type='text' name='theemail' id='emailbox'><br>
+</form>
+<button onclick='sendRGdata()'>SendAll</button>
+<div id='backst'></div>
 <%= link_to 'Back', usergames_path %>
 
