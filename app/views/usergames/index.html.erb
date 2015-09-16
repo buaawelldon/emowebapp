@@ -43,6 +43,8 @@ Playername:
 <img src='/images/redh.jpeg'     id='redh' width="25" height="25" style="display: none;"/>
 <img src='/images/coin.jpg'     id='coin' width="25" height="25" style="display: none;"/>
 <img src='/images/over.jpg'     id='gg' width="25" height="25" style="display: none;"/>
+<img src='/images/start.png'     id='start' width="360" height="120" style="display: none;"/>
+
 <!-- 
 <div id='link2reg'>
 <a href='/caminputs/'><font size='4' color='red'>Emotion not correct? register your own emotion to play ?</a>
@@ -65,8 +67,10 @@ Playername:
     var context = canvas.get()[0].getContext('2d');
     var redlife=$('#redh').get()[0];
     var coinim=$('#coin').get()[0];
-    var ggim=$('#gg').get()[0];  
+    var ggim=$('#gg').get()[0];
+    var bgm=$('#start').get()[0];  
     var maincanv=document.getElementById('maincv');  
+    
     var render_flag=0;
     document.getElementById('backmusic').loop=false
     document.getElementById('gameov').loop=false
@@ -110,53 +114,58 @@ if (navigator.getUserMedia) {
                 
             }, 100);
         timer2=setInterval(function(){
-          var backgr=$('#backimg').get()[0];
-          var maintx=$('#maincv').get()[0].getContext('2d');
-          maintx.drawImage(backgr,0,0,960,720);
-          maintx.drawImage(vid, 0, 0, 160, 120);
-          status_cnt+=1;
-          
-          if (status_cnt>20 && game_status==0)
-            {game_status=1;}
-          
-          if (game_status==0)
+            
+            var backgr=$('#backimg').get()[0];
+            var maintx=$('#maincv').get()[0].getContext('2d');
+            maintx.drawImage(backgr,0,0,960,720);
+            maintx.drawImage(vid, 0, 0, 160, 120);
+            if (game_begin==false)
+              maintx.drawImage(bgm,300,210,360,150)
+          if (game_begin)
           {
-            var nmtxt=Math.floor((20-status_cnt)/5);
-            maintx.font="100px Georgia";
-            maintx.fillStyle='red'
-            maintx.fillText(nmtxt.toString(),460,250);
-          }
-          if (game_status==1)
-          {
-            bkplay.play()
-            if (game_life>0)
+            status_cnt+=1;
+            
+            if (status_cnt>15 && game_status==0)
+              {game_status=1;}
+            
+            if (game_status==0)
             {
-              showlife(maintx);
-              showobj(maintx);  
+              var nmtxt=Math.floor((15-status_cnt)/5)+1;
+              maintx.font="100px Georgia";
+              maintx.fillStyle='red'
+              maintx.fillText(nmtxt.toString(),460,250);
             }
-            if(game_life==0)
+            if (game_status==1)
             {
-              bkplay.pause()
-              ovplay.play()
-              game_status=2
+              bkplay.play()
+              if (game_life>0)
+              {
+                showlife(maintx);
+                showobj(maintx);  
+              }
+              if(game_life==0)
+              {
+                bkplay.pause()
+                ovplay.play()
+                game_status=2
+                maintx.drawImage(ggim,280,160,400,200);
+              }
+
+            }
+            if(game_status==2)
+            {
+              maintx.font="40px Georgia";
+              maintx.fillStyle='black'
+              maintx.fillText('Your final score: '+game_score.toString()+', great!',280,400); 
+              maintx.font="50px Georgia";
+              maintx.fillStyle='red'
+              maintx.fillText('click to play again',280,450); 
               maintx.drawImage(ggim,280,160,400,200);
+
             }
-
-          }
-          if(game_status==2)
-          {
             maintx.font="40px Georgia";
-            maintx.fillStyle='black'
-            maintx.fillText('Your final score: '+game_score.toString()+', great!',280,400); 
-            maintx.font="50px Georgia";
-            maintx.fillStyle='red'
-            maintx.fillText('click to play again',280,450); 
-            maintx.drawImage(ggim,280,160,400,200);
-
+            maintx.fillText('Score: '+game_score.toString(),700,50);
           }
-          maintx.font="40px Georgia";
-          maintx.fillText('Score: '+game_score.toString(),700,50);
-
         },300);
         time3=setInterval(
           function () {
@@ -186,6 +195,7 @@ if (navigator.getUserMedia) {
    var status_cnt=0;
    var stop_delay=0;
    var game_score=0;
+   var game_begin=false
    function showlife(maintx){
     for (var i = 0; i < game_life; i++) 
     {
@@ -267,6 +277,18 @@ if (navigator.getUserMedia) {
     function clickname(){
       $('#playid').text(document.getElementById('nameid').value)    
     }
+    $("#maincv").click( function(){
+    
+          // document.getElementById("emoid").innerHTML = "Hello World";
+      
+            //$("span").text("X: " + txtX + ", Y: " + txtY ); 
+        //check the mouse position to decide which image to show
+        // alert('game gonna begin')
+         if (game_begin==false)
+          {
+            game_begin=true      
+          }
+    });
 // $('#playid').text('string')
 </script>
 
@@ -276,6 +298,7 @@ if (navigator.getUserMedia) {
 <div> Angry | Disgust | Fear | Happy | Neutral | Sad | Surprise</div>
 <div id="feedback">score to show</div>
 <div id='emoid'>'0'</div>
+<div id='ts'></div>
 <div id='camid'>
 <%= link_to 'Back', usergames_path %>
 </div>

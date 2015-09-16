@@ -104,17 +104,19 @@ class UsergamesController < ApplicationController
         
     end
 
-    file=File.read('/home/wei/Documents/pythontool/ownft.json')
+    file=File.read('/home/wei/Documents/pythontool/JSON/'+@usergame.name+'.json')
         h=JSON.parse(file)  
         @usergame.attributes={angry:h["Angry"], disgust:h["Disgust"], fear:h["Fear"], happy: h["Happy"], neutral:h["Neutral"], sad:h["Sad"], surprise:h["Surprise"]}
-    varst=''
-    for i in 1..7
-        file=File.read('/home/wei/Documents/pythontool/test'+i.to_s+'.json')
-        h=JSON.parse(file)
-        varst+=h['flag']
-    end
 
-    @usergame.stat=varst
+    if @usergame.stat=='rg' 
+            varst=''
+      for i in 1..7
+          file=File.read('/home/wei/Documents/pythontool/test'+i.to_s+'.json')
+          h=JSON.parse(file)
+          varst+=h['flag']
+      end
+        @usergame.stat=varst
+    end
 
     respond_to do |format|
       # if @usergame.save

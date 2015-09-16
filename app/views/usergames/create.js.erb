@@ -20,12 +20,57 @@ for (var i = 0; i < scr.length; i++)
 		scdemo=scr[i];
 	}
 }
-str_stat='<%=@usergame.stat%>'
-$('#backst').text(str_stat)
 if (scr[0]==0&scr[3]==0&&scr[4]==0)
-{$('#emoid').text('str_stat')}
+{$('#emoid').text('8')}
 else
 {$('#emoid').text(maxind.toString())}
+
+str_stat='<%=@usergame.stat%>'
+$('#ts').text(str_stat)
+if (str_stat!='game')
+{
+if (str_stat=='1111111')
+{
+	window.location.replace('/usergames');
+	str_stat='0000000'
+}
+$('#backst').text(str_stat)
+
+if(str_stat!='1111111')
+{
+	for(var i=0;i<7;i++)
+	{
+		maincanv.font="20px Arial";
+            // maincanv.fillStyle='black'
+
+          if (str_stat[0]=='0')
+            maincanv.fillText('Not detected, Recap Angry',320,100);
+
+          if (str_stat[1]=='0')
+            maincanv.fillText('Not detected, Recap Disgust',620,100)
+
+          if (str_stat[2]=='0')
+            maincanv.fillText('Not detected, Recap Fear',920,100)
+
+          if (str_stat[3]=='0')
+            maincanv.fillText('Not detected, Recap Happy ',20,350)
+
+          if (str_stat[4]=='0')
+            maincanv.fillText('Not detected, Recap Neutral ',320,350)
+
+          if (str_stat[5]=='0')
+            maincanv.fillText('Not detected, Recap Sad ',620,350)
+
+          if (str_stat[6]=='0')
+            maincanv.fillText('Not detected, Recap Surprise',920,350)
+
+            maincanv.fill()
+	}
+}
+}
+
+
+
 
 
 //if not register correctly do something here
