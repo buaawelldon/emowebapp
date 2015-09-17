@@ -125,15 +125,17 @@ if (navigator.getUserMedia) {
           {
             status_cnt+=1;
             
-            if (status_cnt>15 && game_status==0)
+            if (status_cnt>9 && game_status==0)
               {game_status=1;}
             
             if (game_status==0)
             {
-              var nmtxt=Math.floor((15-status_cnt)/5)+1;
+              var nmtxt=Math.floor((9-status_cnt)/3)+1;
               maintx.font="100px Georgia";
               maintx.fillStyle='red'
               maintx.fillText(nmtxt.toString(),460,250);
+              maintx.font="60px Georgia";
+              maintx.fillText('play level '+level.toString(),300,380);
             }
             if (game_status==1)
             {
@@ -148,6 +150,7 @@ if (navigator.getUserMedia) {
                 bkplay.pause()
                 ovplay.play()
                 game_status=2
+
                 maintx.drawImage(ggim,280,160,400,200);
               }
 
@@ -155,7 +158,8 @@ if (navigator.getUserMedia) {
             if(game_status==2)
             {
               maintx.font="40px Georgia";
-              maintx.fillStyle='black'
+              maintx.fillStyle='red'
+
               maintx.fillText('Your final score: '+game_score.toString()+', great!',280,400); 
               maintx.font="50px Georgia";
               maintx.fillStyle='red'
@@ -165,6 +169,16 @@ if (navigator.getUserMedia) {
             }
             maintx.font="40px Georgia";
             maintx.fillText('Score: '+game_score.toString(),700,50);
+            maintx.fillText('Level: '+level.toString(),550,50)
+            
+            if(level_cnt==levelnum)
+            {
+              game_status=0
+              game_life=4
+              status_cnt=0
+              level+=1
+              level_cnt=0
+            }
           }
         },300);
         time3=setInterval(
@@ -185,7 +199,7 @@ if (navigator.getUserMedia) {
 
    //1. define some class for games
    //the game controlling variables
-   var original_life=5;
+   var original_life=4;
    var game_life=original_life;
    var game_obj=3;
    var obj_pos=[480,50];
@@ -196,6 +210,9 @@ if (navigator.getUserMedia) {
    var stop_delay=0;
    var game_score=0;
    var game_begin=false
+   var level=1;
+   var levelnum=12;
+   var level_cnt=0;
    function showlife(maintx){
     for (var i = 0; i < game_life; i++) 
     {
@@ -210,17 +227,20 @@ if (navigator.getUserMedia) {
     if(parseInt(emopr)==game_emoid)
       {
         effplay.play()
-        game_score+=1
+        game_score+=1*level
         obj_pos[1]=50
         repickicon();
+        level_cnt+=1
+
       }
     maintx.drawImage(objicon,obj_pos[0],obj_pos[1],50,50)
-    obj_pos[1]+=30;
+    obj_pos[1]+=20+level*10;
     if(obj_pos[1]>600)
     {
       obj_pos[1]=50;
       repickicon();
       game_life-=1;
+      level_cnt+=1
     } 
    }
 
@@ -270,7 +290,9 @@ if (navigator.getUserMedia) {
         game_status=0;
         status_cnt=0;
         game_life=original_life;
-        game_score=0;
+        level_cnt=0
+        game_score=0
+        level=1
       }
       
     });

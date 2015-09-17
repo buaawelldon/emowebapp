@@ -90,6 +90,8 @@ class UsergamesController < ApplicationController
           f.write image_data
         end
         %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
+
+        @usergame.save
     end
     if @usergame.stat=='game'
       # if true
