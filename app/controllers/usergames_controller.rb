@@ -90,8 +90,6 @@ class UsergamesController < ApplicationController
           f.write image_data
         end
         %x(curl --data  #{Rails.root}/public/assets/images/#{@usergame.name}/test7.jpg 134.74.112.32:2501)
-
-        @usergame.save
     end
     if @usergame.stat=='game'
       # if true
@@ -103,13 +101,14 @@ class UsergamesController < ApplicationController
         end
         %x(curl --data  #{Rails.root}/public/assets/images/test.jpgADD#{@usergame.name} 134.74.112.32:2502)
         
-        
-    end
-
-    file=File.read('/home/wei/Documents/pythontool/JSON/'+@usergame.name+'.json')
+        file=File.read('/home/wei/Documents/pythontool/JSON/'+@usergame.name+'.json')
         h=JSON.parse(file)  
         @usergame.attributes={angry:h["Angry"], disgust:h["Disgust"], fear:h["Fear"], happy: h["Happy"], neutral:h["Neutral"], sad:h["Sad"], surprise:h["Surprise"]}
 
+        
+    end
+
+    
     if @usergame.stat=='rg' 
             varst=''
       for i in 1..7
